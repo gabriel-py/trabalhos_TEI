@@ -1,4 +1,4 @@
-#João Francisco Carvalho Soares de Oliveira Queiroga - 20292020135
+#João Francisco Carvalho Soares de Oliveira Queiroga - 20192020135
 #A solução impĺemrntada faz uma busca de profundidade na matriz de adjacencia e verificar se todos os vértices foram visitados.
 #Não foi preciso criar uma estrutura armazenando os dados em sí já que era somente necessário checar se os vértices estavam todos ligados entre sí.
 def dfs(vertice, visitados = []):
