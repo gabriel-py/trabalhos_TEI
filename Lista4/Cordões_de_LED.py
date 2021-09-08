@@ -16,12 +16,12 @@ def faz_ligacao(vertice1, vertice2):
 
 N, L = map(int, input().split())
 ligacoes = [[0 for j in range(N)] for i in range(N)]
+n_pre, n_pos = 1, 1
 for i in range(L):
     x, y = map(int, input().split())
     faz_ligacao(x, y)
 
 visitados = dfs(1)
-print(len(visitados))
 if len(visitados) == N:
     print("COMPLETO")
 else:
