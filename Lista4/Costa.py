@@ -1,4 +1,6 @@
 #João Francisco Carvalho Soares de Oliveira Queiroga - 20292020135
+#Gabriel Gonçalves de Souza Ribeiro - 20192003573
+#Raquel Alexsandra do Couto - 201811130372
 #A solução implementada consiste em armazenar o mapa em uma matriz e verificar se
 #havia alguma borda ou espaço com água adjacente a cada espaço de terra.  
 def verificaLitoral(x, y) -> bool:
@@ -32,4 +34,4 @@ for x in range(M):
         if verificaLitoral(x,y):
             litorais+=1
 
-print(litorais)
+print(litorais)/
