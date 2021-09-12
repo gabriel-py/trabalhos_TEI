@@ -34,4 +34,4 @@ for x in range(M):
         if verificaLitoral(x,y):
             litorais+=1
 
-print(litorais)/
+print(litorais)
