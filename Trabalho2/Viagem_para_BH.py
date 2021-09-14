@@ -10,10 +10,8 @@ while True:
     try:
         A, B, T, R = map(int, input().split())
         if T == 1:
-            grafo_aviao.append([A, B, R])
-            pass
+            grafo_aviao.append([A, [B, R]])
         else:
             grafo_onibus.append([A, B, R])
-            pass
     except EOFError:
         break
