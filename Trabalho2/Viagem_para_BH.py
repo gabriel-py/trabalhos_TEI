@@ -1,6 +1,16 @@
 #Ainda não está pronto
-def dfs(vertice, caminho = []):
-    pass
+def menor_preco(array):
+    menor = array[0][1]
+    for i in range(len(array)):
+        if array[i][1] < menor:
+            menor = array[i][1]
+    return menor
+
+
+def dfs(vertice_fonte):
+    nao_resolvido = [vertice_fonte]
+    while nao_resolvido:
+        vertice = nao_resolvido.pop(menor_preco(nao_resolvido))
 
 N, M = map(int, input().split())
 
@@ -17,4 +27,4 @@ while True:
             grafo_onibus[A - 1].append([B, R])
     except EOFError:
         break
-print(grafo_aviao)
+print(grafo_onibus)
