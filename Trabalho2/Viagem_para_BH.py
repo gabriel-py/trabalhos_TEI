@@ -2,17 +2,19 @@
 def dfs(vertice, caminho = []):
     pass
 
-N, M = map(str, input().split())
+N, M = map(int, input().split())
 
-grafo_onibus = []
-grafo_aviao = []
+grafo_onibus = [[] for i in range(N)]
+grafo_aviao = [[] for i in range(N)]
 
 while True:
     try:
         A, B, T, R = map(int, input().split())
         if T == 1:
-            grafo_aviao.append([A, [B, R]])
+            grafo_aviao[A - 1].append([B, R])
+            pass
         else:
-            grafo_onibus.append([A, B, R])
+            grafo_onibus[A - 1].append([B, R])
     except EOFError:
         break
+print(grafo_aviao)
