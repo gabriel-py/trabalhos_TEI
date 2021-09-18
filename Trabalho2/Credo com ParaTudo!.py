@@ -29,18 +29,24 @@ for i in range(num_perguntas):
     n = int(n)
     perguntas.append([m, n])
 
+num_grafo = 1
 def dfs(de):
-    visitado[de] = True
+    visitado[de] = num_grafo
     vizinhos = adjacencias[de]
     for vizin in vizinhos:
         if visitado[vizin] == False:
             dfs(vizin)
+            
 dfs(1)
+for vert in visitado:
+    if(visitado[vert]==False):
+        num_grafo = num_grafo + 1
+        dfs(vert)
 
 for pergunta in perguntas:
     de = pergunta[0]
     para = pergunta[1]
-    if(visitado[de]==False or visitado[para]==False):
-        print("Deu ruim")
-    else:
+    if(visitado[de]==visitado[para]):
         print("Lets que lets")
+    else:
+        print("Deu ruim")
