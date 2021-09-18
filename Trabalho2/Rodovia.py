@@ -2,46 +2,68 @@
 # João Francisco Carvalho Soares de Oliveira Queiroga - 20192020135
 # Raquel Alexsandra do Couto - 201811130372
 
-"""O problema se baseia em descobrir se o grafo é um grande ciclo, que saindo de um dado vértice é possivel voltar para ele mesmo, depois de percorrer todos os outros vertices do grafo"""
-
+"""O problema se baseia em descobrir se o grafo direcionado é fortemente conexo (no caso, como o número de vertices e arestas são iguais, um grande ciclo), que saindo de um vertice é possivel chegar em todos os outros e retornar para ele mesmo. Para isso usamos o algoritmo DFS duas vezes: antes e após inverter o grafo. Assim, podemos nos assegurar de que partindo de qualquer vertice é possível chegar a qualquer outro"""
 
 vert_arestas = int(input())
 
-vertices_visita = {} 
-adjacencia = {}
+visitado = {} 
+adjacencias = {}
+for i in range(vert_arestas):
+    adjacencias[i+1] = []
+    
 for i in range(vert_arestas):
     m, n = input().split(" ")
     m = int(m)
     n = int(n)
-    adjacencia[m] = n
-    vertices_visita[i+1] = False
+    adjacencias[m].append(n)
+    visitado[i+1] = False
 
-exit = 0
-if(len(adjacencia)<vert_arestas):
-    print("N")
-    exit = 1
-
-def verifica_todos_visitados(vertices_visita):
-    for vert in vertices_visita:
-        if(vertices_visita[vert]):
-            continue
-        else:
+def verifica_visitado(visitado):
+    for vert in visitado:
+        if(visitado[vert]==False):
             return False
     return True
 
-ini = 1
-inicial = 1
-if(exit==0):
-    while(True):
-        vertices_visita[inicial] = True
-        inicial = adjacencia[inicial]
-        verifica = verifica_todos_visitados(vertices_visita)
-        if(inicial == ini and verifica):
-            print("S")
-            break;
-        if(inicial != ini and verifica):
-            print("N")
-            break;
-        if(inicial == ini and verifica==False):
-            print("N")
-            break;
+
+def dfs(vertice):
+    fila = []
+    fila.append(vertice)
+    vizinhos = adjacencias[vertice]
+    while(len(fila)!=0):
+        vertice = fila[0]
+        visitado[vertice] = True
+        vizinhos = adjacencias[vertice]
+        for vizin in vizinhos:
+            if visitado[vizin] == False:
+                fila.append(vizin)
+        fila.pop(0)
+        
+dfs(1)
+
+if(verifica_visitado(visitado)):
+    
+    ## Reseta o dic visitado
+    for vert in visitado:
+        visitado[vert] = False
+
+    ##Inversão das adjacencias
+    adjacencias_inversa = {}
+    for i in range(vert_arestas):
+        adjacencias_inversa[i+1] = []
+        
+    for vert in adjacencias:
+        vertices_referenciados = adjacencias[vert]
+        for ref in vertices_referenciados:
+            adjacencias_inversa[ref].append(vert)
+            
+    adjacencias = adjacencias_inversa
+    
+    dfs(1)
+    
+    if(verifica_visitado(visitado)):
+        print("S")
+    else:
+        print("N")
+    
+else:
+    print("N")
